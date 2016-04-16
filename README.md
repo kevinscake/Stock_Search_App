@@ -83,6 +83,61 @@ Key Words: Search form, autocomplete
 
 ###1. search form
 
+####1. Get Quote `Button`
+
+1) Model-View-Controller Design pattern ---> it is the way we organize code in xCode
+
+1.1) Model 
+
+* some kind of data structure, it is just the raw data
+
+* swift file, XML file, database, ...
+
+1.2) View
+
+* the look of things
+
+* `.storyboard` file
+
+1.3) Controller
+
+* connect Model and View
+
+* `ViewController.swift` file
+
+2) connect `Button` view to controller
+
+* right click button view and drag to  controller code
+
+* outlet/action
+
+> outlet : view object itself as a variable
+> action : use view object to trigger an action
+
+####2. input `Text Field`
+
+2.1) CCAutocomplete
+
+* how to import CCAutocomplete module in `ViewController.swift`
+
+```
+import CCAutocomplete
+```
+*build* project to make it work!
+
+* how to use functions of the module
+
+```
+extension ViewController: AutocompleteDelegate {
+	func autoCompleteTextField() -> UITextField {
+        return self.inputTextField
+    }
+
+    func ...
+}
+```
+
+
 
 
 
