@@ -15,7 +15,7 @@ Key Words: description, iOS dev, Swift
 
 ###1. Achitechture Overview
 
-![Achitechture Overview](https://photos-3.dropbox.com/t/2/AAD-_xNnrWRHz-TlbbMV5X8RDXMb0aVY_z9UmTeItoSMZA/12/523553986/png/32x32/1/_/1/2/Achitecture.png/EPKNxpgEGEYgAigC/rbUP76HgObtgV9nFUc1838XkB__ff4Jgv5mGLG9GmIs?size=1024x768&size_mode=3)
+![Achitechture Overview](https://www.dropbox.com/s/1ya5sk36235jdhr/Achitecture.png)
 
 
 ###2. Related technologies
