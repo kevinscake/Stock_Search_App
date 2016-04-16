@@ -41,13 +41,41 @@ Key Words: description, iOS dev, Swift
 
 >Using it to install many third party modules and frameworks.
 
+* install cocoapods
+
+```
+sudo gem install cocoapods
+```
+
+* import third part modules
+
+1) create text file named `Podfile` in your Xcode project directory with following contents:
+
+```
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'CCAutocomplete'
+
+```
+
+2) install third part module using command
+
+```
+pod install
+```
+
+3) open the Xcode *workspace* instead of the project file when building your project
+
 ####3.2 Facebook Developer Application
 
 ###4. Create project
 
 App Name: Stock Search
 
-###5. Search Form
+
+
+
 
 
 
