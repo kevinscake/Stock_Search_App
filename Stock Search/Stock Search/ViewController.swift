@@ -19,9 +19,7 @@ class ViewController: UIViewController {
     //input text field
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var autocompleteContainerView: UIView!
-    
-    //var autoCompleteViewController: AutoCompleteViewController!
-    
+
     let stockList = ["African Union",
                      "Andorra",
                      "Armenia",
@@ -72,17 +70,26 @@ class ViewController: UIViewController {
 
 //let ViewController containing the UITextField conform to AutocompleteDelegate protocol
 extension ViewController: AutocompleteDelegate {
+    
+    /////////////required methods////////////
+    
+    //Returns UITextField we want to apply autocomplete for
     func autoCompleteTextField() -> UITextField {
         return self.inputTextField
     }
+    
+    //Returns minimum number of characters to start showing autocomplete
     func autoCompleteThreshold(textField: UITextField) -> Int {
         return 0
     }
     
+    //Returns array of objects that conform to AutocompletableOption to be shown in the list of autocomplete
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
-        let filteredCountries = self.stockList.filter { (country) -> Bool in
+        
+        let filteredCountries  = self.stockList.filter { (country) -> Bool in
             return country.lowercaseString.containsString(term.lowercaseString)
         }
+        
         
         let countriesAndFlags: [AutocompletableOption] = filteredCountries.map { (var country) -> AutocompleteCellData in
             country.replaceRange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalizedString)
@@ -92,11 +99,12 @@ extension ViewController: AutocompleteDelegate {
         return countriesAndFlags
     }
     
+    //Maximum height which shows autocomplete items
     func autoCompleteHeight() -> CGFloat {
         return CGRectGetHeight(self.view.frame) / 3.0
     }
     
-    
+    //Is getting called when we tapped on the autocomplete item
     func didSelectItem(item: AutocompletableOption) {
         //item.text is what user selected
     }

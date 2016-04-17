@@ -112,6 +112,7 @@ Key Words: Search form, autocomplete
 * outlet/action
 
 > outlet : view object itself as a variable
+> 
 > action : use view object to trigger an action
 
 ####2. input `Text Field`
@@ -136,6 +137,19 @@ extension ViewController: AutocompleteDelegate {
     func ...
 }
 ```
+
+###2. Auto layout
+
+* `Lable` Stock Search 
+
+* `Text Field` input text field
+
+* `Button` Get Quote
+
+* `View` Autocomplete Container View
+
+
+
 
 
 

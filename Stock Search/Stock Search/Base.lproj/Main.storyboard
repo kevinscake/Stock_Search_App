@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,25 +18,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQX-5m-f6J">
-                                <rect key="frame" x="244" y="20" width="112" height="75"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQX-5m-f6J">
+                                <rect key="frame" x="247" y="146" width="106" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Get Quote"/>
                                 <connections>
                                     <action selector="getQuoteClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kZ1-72-Hri"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Stock Name or Symbol" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pO6-5F-RV1">
-                                <rect key="frame" x="99" y="103" width="402" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cne-cK-gUi">
+                                <rect key="frame" x="20" y="131" width="560" height="469"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rox-CD-3aN">
+                                <rect key="frame" x="218" y="40" width="164" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Stock Name or Symbol" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pO6-5F-RV1">
+                                <rect key="frame" x="20" y="103" width="560" height="28"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cne-cK-gUi">
-                                <rect key="frame" x="99" y="133" width="402" height="261"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.18351668604087523" green="1" blue="0.66867983395129094" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="rQX-5m-f6J" firstAttribute="top" secondItem="pO6-5F-RV1" secondAttribute="bottom" constant="15" id="2c9-TH-RGY"/>
+                            <constraint firstItem="pO6-5F-RV1" firstAttribute="top" secondItem="rox-CD-3aN" secondAttribute="bottom" constant="30" id="9nz-Ec-axi"/>
+                            <constraint firstItem="rox-CD-3aN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="FcT-QQ-lam"/>
+                            <constraint firstItem="cne-cK-gUi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xhh-xV-css"/>
+                            <constraint firstItem="pO6-5F-RV1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cvU-pb-Mex"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pO6-5F-RV1" secondAttribute="trailing" id="dH8-Lq-Xe6"/>
+                            <constraint firstItem="rox-CD-3aN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f4t-o4-p3O"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cne-cK-gUi" secondAttribute="trailing" id="h7z-z2-TCJ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cne-cK-gUi" secondAttribute="bottom" id="j3G-Un-N07"/>
+                            <constraint firstItem="rQX-5m-f6J" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mMk-Yp-8ZG"/>
+                            <constraint firstItem="cne-cK-gUi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="pxp-kX-TFY"/>
+                            <constraint firstItem="cne-cK-gUi" firstAttribute="top" secondItem="pO6-5F-RV1" secondAttribute="bottom" id="yJp-de-HPT"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="autocompleteContainerView" destination="cne-cK-gUi" id="3qG-kW-I7s"/>
