@@ -168,6 +168,21 @@ Key Words: Swift
 
 ###6. String
 
+---
+
+Date: 04/18/2016
+
+Key Words: 
+
+---
+
+
+###1. autocomplete
+
+####1) adjust max height for dispaying autocomplete items
+
+
+
 
 
 

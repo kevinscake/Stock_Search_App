@@ -71,7 +71,7 @@ class ViewController: UIViewController {
 //let ViewController containing the UITextField conform to AutocompleteDelegate protocol
 extension ViewController: AutocompleteDelegate {
     
-    /////////////required methods////////////
+    ////////////////////required methods////////////////////
     
     //Returns UITextField we want to apply autocomplete for
     func autoCompleteTextField() -> UITextField {
@@ -86,27 +86,28 @@ extension ViewController: AutocompleteDelegate {
     //Returns array of objects that conform to AutocompletableOption to be shown in the list of autocomplete
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
         
-        let filteredCountries  = self.stockList.filter { (country) -> Bool in
-            return country.lowercaseString.containsString(term.lowercaseString)
+        var countries: [AutocompletableOption] = []
+        
+        for countryName in self.stockList {
+            countries.append(AutocompleteCellData(text: countryName, image: nil))
         }
         
-        
-        let countriesAndFlags: [AutocompletableOption] = filteredCountries.map { (var country) -> AutocompleteCellData in
-            country.replaceRange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalizedString)
-            return AutocompleteCellData(text: country, image: UIImage(named: country))
-            }.map( { $0 as AutocompletableOption })
-        
-        return countriesAndFlags
+        return countries;
     }
     
     //Maximum height which shows autocomplete items
     func autoCompleteHeight() -> CGFloat {
-        return CGRectGetHeight(self.view.frame) / 3.0
+        //height of each cell is 60, 4*60 allows at most display 4 cells
+        return 240
     }
     
     //Is getting called when we tapped on the autocomplete item
     func didSelectItem(item: AutocompletableOption) {
         //item.text is what user selected
     }
+    
+    
+    ////////////////////optional methods////////////////////
+    
 }
 
