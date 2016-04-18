@@ -148,6 +148,25 @@ extension ViewController: AutocompleteDelegate {
 
 * `View` Autocomplete Container View
 
+---
+
+Date: 04/17/2016
+
+Key Words: Swift
+
+---
+
+###1. function
+
+###2. class
+
+###3. protocol
+
+###4. Array, Dictionary, Set
+
+###5. Tuple
+
+###6. String
 
 
 
