@@ -8,6 +8,7 @@
 
 import UIKit
 import CCAutocomplete
+import Alamofire
 
 
 
@@ -19,7 +20,7 @@ class ViewController: UIViewController {
     //input text field
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var autocompleteContainerView: UIView!
-
+    
     let stockList = ["African Union",
                      "Andorra",
                      "Armenia",
@@ -48,9 +49,14 @@ class ViewController: UIViewController {
         }
     }
     
-    
     //get quote button
     @IBAction func getQuoteClicked(sender: AnyObject) {
+        
+        //validation
+
+        //valid input: request to server
+        
+        //invalid input: alert message, no request
         
     }
     
@@ -80,11 +86,21 @@ extension ViewController: AutocompleteDelegate {
     
     //Returns minimum number of characters to start showing autocomplete
     func autoCompleteThreshold(textField: UITextField) -> Int {
-        return 0
+        return 2
     }
     
     //Returns array of objects that conform to AutocompletableOption to be shown in the list of autocomplete
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
+        
+        //lookup request
+        Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["lookupInput": term])
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    print(JSON)
+                }
+        }
+        
+        
         
         var countries: [AutocompletableOption] = []
         
@@ -106,8 +122,6 @@ extension ViewController: AutocompleteDelegate {
         //item.text is what user selected
     }
     
-    
-    ////////////////////optional methods////////////////////
     
 }
 

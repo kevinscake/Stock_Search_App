@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CCAutocomplete.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>93BDAEFBFC81B3650CE309DFDABCFAB1</key>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A1B8A11CB006FD870EBBFCAD7E7EDEA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB1D3F377082E8A3153E50EC8F953964</key>
 		<dict>
 			<key>primary</key>
 			<true/>

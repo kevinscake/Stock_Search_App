@@ -181,6 +181,69 @@ Key Words:
 
 ####1) adjust max height for dispaying autocomplete items
 
+####2) CLEAR button in the right of ‘UITextField’
+
+* `Text Field` attribute: Clear Button
+
+####3) Lookup request
+
+#####3.1) HTTP request using Alamofire
+
+##### install
+
+in `Podfile`, add below and 
+
+```
+pod 'Alamofire', '~> 3.3'
+```
+
+in command line
+```
+pod install
+```
+
+##### usage
+
+* `import Alamofire` and build project
+
+* request and JSON response
+
+```
+Alamofire.request(.GET, "xxxxx.com/", parameters: ["lookupInput": term])
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    print(JSON)
+                }
+        }
+```
+#####problem with `Transport Security has Blocked a cleartext HTTP`
+
+>add below to `info.plist`
+>
+>change `www.yourwebservicedomain.com` to your responding server domain
+
+```
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+        <key>www.yourwebservicedomain.com</key>
+        <dict>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+            <key>NSExceptionMinimumTLSVersion</key>
+            <string>TLSv1.1</string>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+        </dict>
+    </dict>
+</dict>
+```
+
+
+
+
+
 
 
 
