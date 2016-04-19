@@ -216,6 +216,9 @@ Alamofire.request(.GET, "xxxxx.com/", parameters: ["lookupInput": term])
                 }
         }
 ```
+
+* parse JSON to array ----> SwiftJSON lib
+
 #####problem with `Transport Security has Blocked a cleartext HTTP`
 
 >add below to `info.plist`
@@ -239,6 +242,8 @@ Alamofire.request(.GET, "xxxxx.com/", parameters: ["lookupInput": term])
     </dict>
 </dict>
 ```
+
+#####
 
 
 

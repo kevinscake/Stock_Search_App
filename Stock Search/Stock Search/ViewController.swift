@@ -9,6 +9,7 @@
 import UIKit
 import CCAutocomplete
 import Alamofire
+import SwiftyJSON
 
 
 
@@ -93,22 +94,45 @@ extension ViewController: AutocompleteDelegate {
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
         
         //lookup request
+        var stocks: [AutocompletableOption] = []
+        
         Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["lookupInput": term])
-            .responseJSON { response in
-                if let JSON = response.result.value {
-                    print(JSON)
+            .responseJSON{ response in
+                
+                //error check
+                guard response.result.error == nil else {
+                    // got an error in getting the data, need to handle it
+                    print("error happen!")
+                    return
                 }
+                
+                //get SwityJSON's JSON type
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    var symbol:String
+                    //                    var name:String = json[0]["Name"].string!
+                    //                    var exchange:String = json[0]["Exchange"].string!
+                    
+                    for item in json {
+                        let jsonOfItem = item.1
+                        
+                        symbol = jsonOfItem["Symbol"].string!
+                        
+                        stocks.append(AutocompleteCellData(text: symbol, image: nil))
+                    }
+                    
+                    //debug
+                    print(stocks)
+                    
+                }
+                
         }
         
-        
-        
-        var countries: [AutocompletableOption] = []
-        
-        for countryName in self.stockList {
-            countries.append(AutocompleteCellData(text: countryName, image: nil))
-        }
-        
-        return countries;
+
+        //return stocks
+        return stocks
+
     }
     
     //Maximum height which shows autocomplete items

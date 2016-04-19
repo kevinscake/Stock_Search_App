@@ -3,3 +3,5 @@ use_frameworks!
 
 pod 'CCAutocomplete'
 pod 'Alamofire', '~> 3.3'
+pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+pod 'Alamofire-Synchronous', :git => 'https://github.com/Dalodd/Alamofire-Synchronous.git'

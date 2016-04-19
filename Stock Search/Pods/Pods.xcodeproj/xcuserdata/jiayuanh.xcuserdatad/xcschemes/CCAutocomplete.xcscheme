@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D35A21A196EBEED40E2C9B94'
+               BlueprintIdentifier = '2CABBA558BDCBF31EE022F9B'
                BlueprintName = 'CCAutocomplete'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'CCAutocomplete.framework'>
