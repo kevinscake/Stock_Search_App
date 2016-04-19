@@ -19,4 +19,5 @@ public class AutoCompleteCell: UITableViewCell {
             self.imgIcon.image = textImage!.image
         }
     }
+    
 }

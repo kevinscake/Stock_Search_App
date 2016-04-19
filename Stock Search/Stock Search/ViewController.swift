@@ -59,6 +59,15 @@ class ViewController: UIViewController {
         //valid input: request to server
         
         //invalid input: alert message, no request
+        /*
+         let alertController = UIAlertController(
+         title: "iOScreator",
+         message: "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
+         
+         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+         
+         self.presentViewController(alertController, animated: true, completion: nil)
+         */
         
     }
     
@@ -101,24 +110,33 @@ extension ViewController: AutocompleteDelegate {
         //json
         let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["lookupInput": term]).responseJSON()
         if let value = response.result.value {
+            
+            //SwiftyJSON's JSON type
             let json = JSON(value)
             
-            var symbol:String
-            //                    var name:String = json[0]["Name"].string!
-            //                    var exchange:String = json[0]["Exchange"].string!
-            
-            for item in json {
-                let jsonOfItem = item.1
+            if(!json.isEmpty){
                 
-                symbol = jsonOfItem["Symbol"].string!
+                var symbol:String
+                var name:String
+                var exchange:String
                 
-                stocks.append(AutocompleteCellData(text: symbol, image: nil))
+                for item in json {
+                    //get json Object
+                    let jsonOfItem = item.1
+                    symbol = jsonOfItem["Symbol"].string!
+                    name = jsonOfItem["Name"].string!
+                    exchange = jsonOfItem["Exchange"].string!
+                    
+                    let cellText = symbol + "-" + name + "-" + exchange
+                    
+                    print(cellText)
+                    
+                    //build return autocomplete items array
+                    stocks.append(AutocompleteCellData(text: cellText, image: nil))
+                }
             }
-            
         }
         
-        
-
         //return stocks
         return stocks
 

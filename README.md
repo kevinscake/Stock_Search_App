@@ -265,6 +265,13 @@ if let json = response.result.value {
 }
 ```
 
+####3.5) empty JSON handle
+
+`if` condition
+
+
+
+
 
 
 
