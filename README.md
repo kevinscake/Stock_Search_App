@@ -217,9 +217,9 @@ Alamofire.request(.GET, "xxxxx.com/", parameters: ["lookupInput": term])
         }
 ```
 
-* parse JSON to array ----> SwiftJSON lib
+#####3.2) parse JSON to array ----> SwiftJSON lib
 
-#####problem with `Transport Security has Blocked a cleartext HTTP`
+#####3.3) problem with `Transport Security has Blocked a cleartext HTTP`
 
 >add below to `info.plist`
 >
@@ -243,7 +243,31 @@ Alamofire.request(.GET, "xxxxx.com/", parameters: ["lookupInput": term])
 </dict>
 ```
 
-#####
+#####3.4) Alamofire-Synchronous
+
+* install
+
+```
+pod 'Alamofire-Synchronous', :git => 'https://github.com/Dalodd/Alamofire-Synchronous.git'
+```
+
+* usage
+
+```
+import Alamofire_Synchronous
+```
+
+```
+//json
+let response = Alamofire.request(.GET, "https://httpbin.org/get", parameters: ["foo": "bar"]).responseJSON()
+if let json = response.result.value {
+    print(json)
+}
+```
+
+
+
+
 
 
 

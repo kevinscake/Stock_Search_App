@@ -10,6 +10,7 @@ import UIKit
 import CCAutocomplete
 import Alamofire
 import SwiftyJSON
+import Alamofire_Synchronous
 
 
 
@@ -95,39 +96,27 @@ extension ViewController: AutocompleteDelegate {
         
         //lookup request
         var stocks: [AutocompletableOption] = []
+
         
-        Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["lookupInput": term])
-            .responseJSON{ response in
+        //json
+        let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["lookupInput": term]).responseJSON()
+        if let value = response.result.value {
+            let json = JSON(value)
+            
+            var symbol:String
+            //                    var name:String = json[0]["Name"].string!
+            //                    var exchange:String = json[0]["Exchange"].string!
+            
+            for item in json {
+                let jsonOfItem = item.1
                 
-                //error check
-                guard response.result.error == nil else {
-                    // got an error in getting the data, need to handle it
-                    print("error happen!")
-                    return
-                }
+                symbol = jsonOfItem["Symbol"].string!
                 
-                //get SwityJSON's JSON type
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    
-                    var symbol:String
-                    //                    var name:String = json[0]["Name"].string!
-                    //                    var exchange:String = json[0]["Exchange"].string!
-                    
-                    for item in json {
-                        let jsonOfItem = item.1
-                        
-                        symbol = jsonOfItem["Symbol"].string!
-                        
-                        stocks.append(AutocompleteCellData(text: symbol, image: nil))
-                    }
-                    
-                    //debug
-                    print(stocks)
-                    
-                }
-                
+                stocks.append(AutocompleteCellData(text: symbol, image: nil))
+            }
+            
         }
+        
         
 
         //return stocks
