@@ -172,7 +172,7 @@ Key Words: Swift
 
 Date: 04/18/2016
 
-Key Words: 
+Key Words: autocomplete
 
 ---
 
@@ -268,6 +268,52 @@ if let json = response.result.value {
 ####3.5) empty JSON handle
 
 `if` condition
+
+###2. Get Quote Button
+
+####1) input validation
+
+1.1) empty
+
+1.2) unmatch
+
+* Problem about text in Text Field: select from cell Vs. not select from cell
+
+> define `var userInputSeletedFromCells = false` to check and handle different condition
+
+
+---
+
+Date: 04/18/2016
+
+Key Words: GET QUOTE
+
+---
+
+###1. Create new view for Stock Details
+
+1.1) create `View Controller` in storyboard
+
+1.2) create `StockDetailsView.swift` and  link new 'View Controller' to it
+
+```
+class StockDetailsView: UIViewController {
+    
+    override func viewDidLoad() {
+        //code
+    }
+    
+}
+```
+
+###2. transition between Views
+
+* button -> drag to other view -> Action Segue: Show
+
+* Navigation Controller
+
+###3. JSON data transition between views
+
 
 
 
