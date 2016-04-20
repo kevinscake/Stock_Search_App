@@ -22,9 +22,9 @@ class ViewController: UIViewController {
     //input text field
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var autocompleteContainerView: UIView!
-    var userInput:String = ""
-    var userInputSeletedFromCells = false
-    var _json:JSON = []
+    //var userInput:String = ""
+    var _json: JSON = []
+    var isInputValid = false
     
     var isFirstLoad: Bool = true
     
@@ -40,53 +40,9 @@ class ViewController: UIViewController {
     //get quote button
     @IBAction func getQuoteClicked(sender: AnyObject) {
         
-        //validation
-        if(!userInputSeletedFromCells) {
-            userInput = inputTextField.text!
-        }
-        
-        //invalid input: alert message, no request
-        //1. Empty
-        if(userInput.isEmpty) {
-            
-            //alert
-            let alertController = UIAlertController(
-                title: "Please Enter a Stock Name or Symbol",
-                message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-            
-        }
-        
-        //2. invalid symbol
-        //Asynchronous Http call
-        Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com//", parameters: ["quoteInput": userInput])
-            .responseJSON { response in
-                if let value = response.result.value {
-                    //SwiftyJSON's JSON type
-                    let json = JSON(value)
-                    
-                    if(json.isEmpty) {
-                        //alert
-                        let alertController = UIAlertController(
-                            title: "Invalid Symbol",
-                            message: "", preferredStyle: UIAlertControllerStyle.Alert)
-                        
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
-                        
-                        self.presentViewController(alertController, animated: true, completion: nil)
-                    }
-                    else{
-                        self._json = json
-                    }
-                }
-        }
-
-        //valid input: request to server
-        
     }
+    
+    
     
     
     //This method is called whenever ANY segue is called
@@ -95,15 +51,106 @@ class ViewController: UIViewController {
         if segue.identifier == "ShowStockDetails" {
             //If segue.destinationViewController can be cast to OtherViewController, then it can be referred to with StockDetailsViewController now.  If not, the if statement evaluates to false, do nothing
             if let StockDetailsViewController: StockDetailsView = segue.destinationViewController as? StockDetailsView {
-                if(!_json.isEmpty) {
-                    //data sending
-                    StockDetailsViewController._json = self._json
-                }
-                else{
-                    print("Oops")
-                }
+                
+                StockDetailsViewController._json = self._json
             }
         }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
+        if identifier == "ShowStockDetails" {
+            
+            //init
+            isInputValid = false
+            
+            ///////////////////////////////validation///////////////////////////////
+            let userInput: String = inputTextField.text!
+            
+            //1. empty input
+            if (inputTextField.text!.isEmpty) {
+                
+                //alert
+                let alertController = UIAlertController(
+                    title: "Please Enter a Stock Name or Symbol",
+                    message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                return false
+            }
+            
+            //2. invalid symbol
+            //Synchronous Http call ----- lookup
+            let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com//", parameters: ["lookupInput": userInput]).responseJSON()
+            if let value = response.result.value {
+                
+                //SwiftyJSON's JSON type
+                let json = JSON(value)
+                
+                if(json.isEmpty){
+                    
+                    //alert
+                    let alertController = UIAlertController(
+                        title: "Invalid Symbol",
+                        message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                else {
+                    isInputValid = true
+                }
+            }
+            
+            //3. valid symbol
+            var isStockInfoAvailable = false
+            
+            if isInputValid {
+                
+                //Synchronous Http call ----- get quote
+                let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["quoteInput": userInput]).responseJSON()
+                if let value = response.result.value {
+                    
+                    //SwiftyJSON's JSON type
+                    let json = JSON(value)
+                    
+                    //no stock info available
+                    if(json["Status"] != "SUCCESS"){
+                        //alert
+                        let alertController = UIAlertController(
+                            title: "No Stock Info Available",
+                            message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                        
+                    }
+                    //stock info availabe
+                    else {
+                        isStockInfoAvailable = true
+                        self._json = json
+                    }
+                }
+                
+                if isStockInfoAvailable {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            else {
+                return false
+            }
+        }
+        
+        // by default, transition
+        return true
     }
     
     //hide navigation bar
@@ -111,10 +158,6 @@ class ViewController: UIViewController {
     {
         self.navigationController?.navigationBarHidden = true
     }
-    
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,10 +193,10 @@ extension ViewController: AutocompleteDelegate {
         
         //lookup request
         var stocks: [AutocompletableOption] = []
-        userInputSeletedFromCells = false
+        //userInputSeletedFromCells = false
 
         
-        //Synchronous Http call
+        //Synchronous Http call ----- look up
         let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["lookupInput": term]).responseJSON()
         if let value = response.result.value {
             
@@ -195,9 +238,9 @@ extension ViewController: AutocompleteDelegate {
     //Is getting called when we tapped on the autocomplete item
     func didSelectItem(item: AutocompletableOption) {
         //item.text is what user selected
-        userInputSeletedFromCells = true
+        //userInputSeletedFromCells = true
         let myStringArr = item.text.componentsSeparatedByString("-")
-        userInput = myStringArr[0]
+        inputTextField.text = myStringArr[0]
         
     }
     

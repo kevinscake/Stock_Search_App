@@ -314,6 +314,22 @@ class StockDetailsView: UIViewController {
 
 ###3. JSON data transition between views
 
+* segue
+
+```
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) { ... }
+```
+
+###4. input validation
+
+* stop segue
+
+```
+override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool { ... }
+```
+
+
+
 
 
 
