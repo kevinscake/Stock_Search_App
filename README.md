@@ -284,7 +284,7 @@ if let json = response.result.value {
 
 ---
 
-Date: 04/18/2016
+Date: 04/19/2016
 
 Key Words: GET QUOTE
 
@@ -341,7 +341,25 @@ override func viewDidLoad() {
 * segmented control
 
 
+---
 
+Date: 04/20/2016
+
+Key Words: Stock Details(Current)
+
+---
+
+###1. UIScrollView
+
+###2. send data between UIViewController
+
+* segue
+
+###3. current page
+
+3.1) scroller
+
+3.2) table view
 
 
 
