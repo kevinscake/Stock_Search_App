@@ -328,6 +328,17 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) { ..
 override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool { ... }
 ```
 
+###4. Set navigation bar title
+
+```
+override func viewDidLoad() {
+    self.title = _json["Symbol"].string
+}
+```
+
+###5. Three buttons(Current, Historical, News) to navigate between 3 pages
+
+* segmented control
 
 
 
