@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -209,11 +210,11 @@
                                                 <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RqQ-Ph-ruv" id="hcB-6U-Lph">
-                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXXXXXXXXXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hse-G0-ReX">
-                                                            <rect key="frame" x="16" y="11" width="157" height="21"/>
+                                                            <rect key="frame" x="16" y="11" width="156.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -267,16 +268,9 @@
                                                 <rect key="frame" x="0.0" y="72" width="560" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Jb-7t-1rz" id="k5g-kA-G28">
-                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F6D-Od-gIo">
-                                                            <rect key="frame" x="507" y="0.0" width="45" height="45"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="45" id="0l0-zh-RCO"/>
-                                                                <constraint firstAttribute="width" constant="45" id="rCb-gJ-rZY"/>
-                                                            </constraints>
-                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXXXXXXXXXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYf-x3-jQq">
                                                             <rect key="frame" x="16" y="11" width="157" height="21"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -284,11 +278,18 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999.99(-99.99%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYl-Zn-tO0">
-                                                            <rect key="frame" x="173" y="11" width="334" height="21"/>
+                                                            <rect key="frame" x="268.5" y="11" width="143" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F6D-Od-gIo">
+                                                            <rect key="frame" x="412" y="0.0" width="45" height="45"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="45" id="0l0-zh-RCO"/>
+                                                                <constraint firstAttribute="width" constant="45" id="rCb-gJ-rZY"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailingMargin" secondItem="F6D-Od-gIo" secondAttribute="trailing" priority="750" id="2ST-Ha-FVt"/>
@@ -306,6 +307,7 @@
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="xxc-ec-DVw"/>
+                                                            <exclude reference="2ST-Ha-FVt"/>
                                                             <exclude reference="Hmp-Fm-pzu"/>
                                                             <exclude reference="NYT-PF-Sfy"/>
                                                             <exclude reference="SBm-0W-pxM"/>
@@ -326,6 +328,14 @@
                                     </tableView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rxr-MN-akB">
                                         <rect key="frame" x="0.0" y="570" width="560" height="430"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="rxr-MN-akB" secondAttribute="height" multiplier="56:33" id="L3l-BR-77k"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="L3l-BR-77k"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -365,7 +375,7 @@
                     <size key="freeformSize" width="560" height="1000"/>
                     <connections>
                         <outlet property="currentScroller" destination="vta-xH-FSs" id="HLL-lD-hws"/>
-                        <outlet property="dailyStockChart" destination="rxr-MN-akB" id="0Hq-jZ-eMM"/>
+                        <outlet property="dailyStockChartImageView" destination="rxr-MN-akB" id="Anx-UH-uJt"/>
                         <outlet property="tableView" destination="vEH-qE-rLU" id="Hpr-kZ-EVl"/>
                     </connections>
                 </viewController>

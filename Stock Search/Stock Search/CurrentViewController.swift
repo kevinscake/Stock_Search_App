@@ -19,6 +19,8 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
+        
+        //define scrollable content area
         self.currentScroller.frame = self.view.bounds
         self.currentScroller.contentSize.height = 1000
         self.currentScroller.contentSize.width = 0
@@ -36,10 +38,22 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         
-        currentScroller.contentInset = UIEdgeInsetsMake(0, 0, 1000, 0)
+        //define the scrollable area that outside of the scrollable content area
+        currentScroller.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
-        //Lbl.text = _json["Name"].string
-        dailyStockChart.image = arrowImage["Up"]!
+        
+        //Daily chart
+        
+        //decide image width & heigh
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let width = screenSize.width
+        let height = screenSize.width*2/3
+        
+        
+        let stockDailyChartURL = "http://chart.finance.yahoo.com/t?s=" + _json["Symbol"].string! + "&lang=en-US&width=" + String(width) + "&height=" + String(height)
+        let url = NSURL(string: stockDailyChartURL)
+        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        dailyStockChartImageView.image = UIImage(data: data!)
         
     }
     
@@ -159,7 +173,7 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //////////////////////daily stock chart image view//////////////////////
     
-    @IBOutlet weak var dailyStockChart: UIImageView!
+    @IBOutlet weak var dailyStockChartImageView: UIImageView!
     
     
     
