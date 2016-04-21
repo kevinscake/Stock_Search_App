@@ -20,7 +20,7 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewWillLayoutSubviews()
         
         self.currentScroller.frame = self.view.bounds
-        self.currentScroller.contentSize.height = 400
+        self.currentScroller.contentSize.height = 1000
         self.currentScroller.contentSize.width = 0
     }
     
@@ -36,9 +36,10 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         
-        currentScroller.contentInset = UIEdgeInsetsMake(0, 0, 400, 0)
+        currentScroller.contentInset = UIEdgeInsetsMake(0, 0, 1000, 0)
         
         //Lbl.text = _json["Name"].string
+        dailyStockChart.image = arrowImage["Up"]!
         
     }
     
@@ -51,7 +52,7 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //////////////////////table view//////////////////////
     @IBOutlet weak var tableView: UITableView!
-    
+    var arrowImage = ["Up": UIImage(named: "Up-52"), "Down": UIImage(named: "Down-52")]
     
     // MARK: - Table view data source
     
@@ -68,49 +69,98 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+        
+        
+        
+        
         
         // Configure the cell...
         switch indexPath.row {
         case 0:
-            cell.noArrowCellTitle.text = "Name"
-            cell.noArrowCellDetail.text = _json["Name"].string
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Name"
+            noArrowCell.noArrowCellDetail.text = _json["Name"].string
+            return noArrowCell
         case 1:
-            cell.noArrowCellTitle.text = "Symbol"
-            cell.noArrowCellDetail.text = _json["Symbol"].string
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Symbol"
+            noArrowCell.noArrowCellDetail.text = _json["Symbol"].string
+            return noArrowCell
         case 2:
-            cell.noArrowCellTitle.text = "Last Price"
-            cell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["LastPrice"].double!)
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Last Price"
+            noArrowCell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["LastPrice"].double!)
+            return noArrowCell
         case 3:
-            cell.noArrowCellTitle.text = "Change"
-            cell.noArrowCellDetail.text = String(format: "%.2f", _json["Change"].double!) + "(" + String(format: "%.2f", _json["ChangePercent"].double!) + "%)"
+            let arrowCell = tableView.dequeueReusableCellWithIdentifier("arrowCell", forIndexPath: indexPath) as! arrowTableViewCell
+            arrowCell.arrowCellTitle.text = "Change"
+            arrowCell.arrowCellDetail.text = String(format: "%.2f", _json["Change"].double!) + "(" + String(format: "%.2f", _json["ChangePercent"].double!) + "%)"
+            
+            //arrow type
+            if(Double(round(1000*_json["Change"].double!)/1000)>0) {
+                arrowCell.arrowCellImage.image = arrowImage["Up"]!
+            }
+            if(Double(round(1000*_json["Change"].double!)/1000)<0) {
+                arrowCell.arrowCellImage.image = arrowImage["Down"]!
+            }
+            
+            return arrowCell
         case 4:
-            cell.noArrowCellTitle.text = "Time and Date"
-            cell.noArrowCellDetail.text = _json["Timestamp"].string
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Time and Date"
+            noArrowCell.noArrowCellDetail.text = _json["Timestamp"].string
+            return noArrowCell
         case 5:
-            cell.noArrowCellTitle.text = "Market Cap"
-            cell.noArrowCellDetail.text = String(format: "%.2f", _json["MarketCap"].double!/1000000000) + "Billion"
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Market Cap"
+            noArrowCell.noArrowCellDetail.text = String(format: "%.2f", _json["MarketCap"].double!/1000000000) + "Billion"
+            return noArrowCell
         case 6:
-            cell.noArrowCellTitle.text = "Volume"
-            cell.noArrowCellDetail.text = String(_json["Volume"].int!)
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Volume"
+            noArrowCell.noArrowCellDetail.text = String(_json["Volume"].int!)
+            return noArrowCell
         case 7:
-            cell.noArrowCellTitle.text = "Change YTD"
-            cell.noArrowCellDetail.text = String(_json["ChangeYTD"].double!) + "(" + String(format: "%.2f", _json["ChangePercentYTD"].double!) + "%)"
+            let arrowCell = tableView.dequeueReusableCellWithIdentifier("arrowCell", forIndexPath: indexPath) as! arrowTableViewCell
+            arrowCell.arrowCellTitle.text = "ChangeYTD"
+            arrowCell.arrowCellDetail.text = String(format: "%.2f", _json["Change"].double!) + "(" + String(format: "%.2f", _json["ChangePercentYTD"].double!) + "%)"
+            
+            //arrow type
+            if(Double(round(1000*_json["Change"].double!)/1000)>0) {
+                arrowCell.arrowCellImage.image = arrowImage["Up"]!
+            }
+            if(Double(round(1000*_json["Change"].double!)/1000)<0) {
+                arrowCell.arrowCellImage.image = arrowImage["Down"]!
+            }
+            
+            return arrowCell
         case 8:
-            cell.noArrowCellTitle.text = "High Price"
-            cell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["High"].double!)
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "High Price"
+            noArrowCell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["High"].double!)
+            return noArrowCell
         case 9:
-            cell.noArrowCellTitle.text = "Low Price"
-            cell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["Low"].double!)
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Low Price"
+            noArrowCell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["Low"].double!)
+            return noArrowCell
         case 10:
-            cell.noArrowCellTitle.text = "Openning Price"
-            cell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["Open"].double!)
-        default: break
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            noArrowCell.noArrowCellTitle.text = "Openning Price"
+            noArrowCell.noArrowCellDetail.text = "$" + String(format: "%.2f", _json["Open"].double!)
+            return noArrowCell
+        default:
+            //something really bad happened here...
+            let noArrowCell = tableView.dequeueReusableCellWithIdentifier("noArrowCell", forIndexPath: indexPath) as! noArrowTableViewCell
+            return noArrowCell
             
         }
-        
-        return cell
     }
+    
+    //////////////////////daily stock chart image view//////////////////////
+    
+    @IBOutlet weak var dailyStockChart: UIImageView!
+    
     
     
 }

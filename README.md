@@ -357,9 +357,19 @@ Key Words: Stock Details(Current)
 
 ###3. current page
 
-3.1) scroller
+3.1) Scroller
 
-3.2) table view
+* how to create more space to contain and edit TableView and ImageView
+
+> View Controller -> Simulated Size: Freedom -> width & heigh
+
+3.2) Table view
+
+* Custom Table View Cell
+
+
+
+
 
 
 
