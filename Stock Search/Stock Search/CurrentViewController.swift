@@ -43,7 +43,6 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
         //Daily chart
-        
         //decide image width & heigh
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let width = screenSize.width
