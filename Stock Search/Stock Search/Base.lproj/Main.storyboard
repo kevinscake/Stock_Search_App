@@ -185,18 +185,11 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aB8-cQ-f6A">
-                                        <rect key="frame" x="450" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="FB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aB8-cQ-f6A">
+                                        <rect key="frame" x="450" y="0.0" width="50" height="50"/>
+                                        <state key="normal" image="Facebook Filled-50"/>
                                         <connections>
                                             <action selector="fbButtonClicked:" destination="Xzb-Pm-huI" eventType="touchUpInside" id="hM0-Yl-vgI"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afu-hy-mOD">
-                                        <rect key="frame" x="530" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="Star"/>
-                                        <connections>
-                                            <action selector="favouriteButtonClicked:" destination="Xzb-Pm-huI" eventType="touchUpInside" id="bcD-Eh-aGV"/>
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vEH-qE-rLU">
@@ -210,11 +203,11 @@
                                                 <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RqQ-Ph-ruv" id="hcB-6U-Lph">
-                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXXXXXXXXXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hse-G0-ReX">
-                                                            <rect key="frame" x="16" y="11" width="156.5" height="21"/>
+                                                            <rect key="frame" x="16" y="11" width="157" height="21"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -268,7 +261,7 @@
                                                 <rect key="frame" x="0.0" y="72" width="560" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Jb-7t-1rz" id="k5g-kA-G28">
-                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXXXXXXXXXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYf-x3-jQq">
@@ -278,7 +271,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999.99(-99.99%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYl-Zn-tO0">
-                                                            <rect key="frame" x="268.5" y="11" width="143" height="21"/>
+                                                            <rect key="frame" x="269" y="11" width="143" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -337,6 +330,13 @@
                                             </mask>
                                         </variation>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afu-hy-mOD">
+                                        <rect key="frame" x="510" y="0.0" width="50" height="50"/>
+                                        <state key="normal" image="Star-Grey-50"/>
+                                        <connections>
+                                            <action selector="favouriteButtonClicked:" destination="Xzb-Pm-huI" eventType="touchUpInside" id="bcD-Eh-aGV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="vEH-qE-rLU" firstAttribute="top" secondItem="vta-xH-FSs" secondAttribute="top" constant="79" id="0Xa-3H-7i9"/>
@@ -345,7 +345,7 @@
                                     <constraint firstItem="aB8-cQ-f6A" firstAttribute="top" secondItem="vta-xH-FSs" secondAttribute="top" id="9Wg-7b-UDE"/>
                                     <constraint firstAttribute="trailing" secondItem="vEH-qE-rLU" secondAttribute="trailing" id="FPJ-hr-fcw"/>
                                     <constraint firstItem="vEH-qE-rLU" firstAttribute="centerX" secondItem="vta-xH-FSs" secondAttribute="centerX" id="Jsl-UI-cTy"/>
-                                    <constraint firstItem="Afu-hy-mOD" firstAttribute="leading" secondItem="aB8-cQ-f6A" secondAttribute="trailing" constant="50" id="KgQ-Ov-2Tz"/>
+                                    <constraint firstItem="Afu-hy-mOD" firstAttribute="leading" secondItem="aB8-cQ-f6A" secondAttribute="trailing" constant="10" id="KgQ-Ov-2Tz"/>
                                     <constraint firstAttribute="bottom" secondItem="rxr-MN-akB" secondAttribute="bottom" id="Occ-WN-egT"/>
                                     <constraint firstItem="rxr-MN-akB" firstAttribute="top" secondItem="vEH-qE-rLU" secondAttribute="bottom" constant="20" id="Plw-Aq-Mhq"/>
                                     <constraint firstItem="vEH-qE-rLU" firstAttribute="leading" secondItem="vta-xH-FSs" secondAttribute="leading" id="WB1-gV-e7S"/>
@@ -353,7 +353,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Afu-hy-mOD" secondAttribute="trailing" id="cWg-Ze-pLa"/>
                                     <constraint firstItem="rxr-MN-akB" firstAttribute="leading" secondItem="vEH-qE-rLU" secondAttribute="leading" id="kQ7-sP-J2G"/>
                                     <constraint firstItem="rxr-MN-akB" firstAttribute="trailing" secondItem="vEH-qE-rLU" secondAttribute="trailing" id="tvM-2E-j0y"/>
-                                    <constraint firstItem="vEH-qE-rLU" firstAttribute="top" secondItem="Afu-hy-mOD" secondAttribute="bottom" constant="20" id="uID-uS-Qrh"/>
+                                    <constraint firstItem="vEH-qE-rLU" firstAttribute="top" secondItem="Afu-hy-mOD" secondAttribute="bottom" id="uID-uS-Qrh"/>
                                     <constraint firstItem="Afu-hy-mOD" firstAttribute="top" secondItem="vta-xH-FSs" secondAttribute="top" id="xYh-y0-dSs"/>
                                 </constraints>
                                 <variation key="default">
@@ -436,4 +436,8 @@
             <point key="canvasLocation" x="2285" y="877"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Facebook Filled-50" width="50" height="50"/>
+        <image name="Star-Grey-50" width="50" height="50"/>
+    </resources>
 </document>
