@@ -367,8 +367,20 @@ Key Words: Stock Details(Current)
 
 * Custom Table View Cell
 
+3.3) Daily chart
 
 
+---
+
+Date: 04/21/2016
+
+Key Words: table view layout, facebook, historical chart
+
+---
+
+###1. table view layout
+
+###2. facebok
 
 
 
