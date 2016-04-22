@@ -32,9 +32,21 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-
-    //facebook button
-    @IBOutlet weak var fbShareButton: FBSDKShareButton!
+    @IBAction func facebookClicked(sender: AnyObject) {
+        ///////////////////////////////////facebook///////////////////////////////////
+        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
+        content.contentURL = NSURL(string: "http://chart.finance.yahoo.com/t?s=" + _json["Symbol"].string! + "&lang=en-US&width=600&height=450")
+        
+        let name = _json["Name"].string!
+        let symbol = _json["Symbol"].string!
+        let lastPrice = String(format: "%.2f", _json["LastPrice"].double!)
+        
+        content.contentTitle = "Current Stock Price of " + name  + " is $" + lastPrice
+        content.contentDescription = "Stock Information of " + name + " (" + symbol + ")"
+        content.imageURL = NSURL(string: "http://chart.finance.yahoo.com/t?s=" + symbol + "&lang=en-US&width=300&height=350")
+        
+        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
+    }
     
     
     
@@ -56,26 +68,16 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
         dailyStockChartImageView.image = UIImage(data: data!)
         
-        ///////////////////////////////////facebook///////////////////////////////////
-        let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "http://chart.finance.yahoo.com/t?s=" + _json["Symbol"].string! + "&lang=en-US&width=600&height=450")
+
         
-        let name = _json["Name"].string!
-        let symbol = _json["Symbol"].string!
-        let lastPrice = String(format: "%.2f", _json["LastPrice"].double!)
-        
-        content.contentTitle = "Current Stock Price of " + name  + " is $" + lastPrice
-        content.contentDescription = "Stock Information of " + name + " (" + symbol + ")"
-        content.imageURL = NSURL(string: "http://chart.finance.yahoo.com/t?s=" + symbol + "&lang=en-US&width=300&height=350")
-        
-        //let button:FBSDKShareButton = FBSDKShareButton()
-        let button:FBSDKShareButton = fbShareButton
-        button.shareContent = content
-        //button.center = fbShareButton.center
-        //button.frame = CGRectMake(50, 50, 50, 50)
-        //button.center = fbShareButton.center
-        //button.frame = CGRectMake((UIScreen.mainScreen().bounds.width - 100) * 0.5, 50, 100, 25)
-        self.view.addSubview(button)
+//        //let button:FBSDKShareButton = FBSDKShareButton()
+//        let button:FBSDKShareButton = fbShareButton
+//        button.shareContent = content
+//        //button.center = fbShareButton.center
+//        //button.frame = CGRectMake(50, 50, 50, 50)
+//        //button.center = fbShareButton.center
+//        //button.frame = CGRectMake((UIScreen.mainScreen().bounds.width - 100) * 0.5, 50, 100, 25)
+//        self.view.addSubview(button)
         
     }
 
