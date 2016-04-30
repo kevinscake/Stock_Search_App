@@ -68,17 +68,6 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
         dailyStockChartImageView.image = UIImage(data: data!)
         
-
-        
-//        //let button:FBSDKShareButton = FBSDKShareButton()
-//        let button:FBSDKShareButton = fbShareButton
-//        button.shareContent = content
-//        //button.center = fbShareButton.center
-//        //button.frame = CGRectMake(50, 50, 50, 50)
-//        //button.center = fbShareButton.center
-//        //button.frame = CGRectMake((UIScreen.mainScreen().bounds.width - 100) * 0.5, 50, 100, 25)
-//        self.view.addSubview(button)
-        
     }
 
     override func didReceiveMemoryWarning() {
