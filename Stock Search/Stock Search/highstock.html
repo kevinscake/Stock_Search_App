@@ -2,43 +2,32 @@
 <html>
 <head>
 	<title>Highcharts</title>
-	<!-- including JQuery -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
-	<div id="historicalCharts">something here...</div>
-
-	<!-- highstock -->
-    <script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+	<div id="historicalCharts"></div>
 
     <!-- highstock render script -->
 	<script>
 
-		var stockSymbol = "AAPL";
-		//var stockSymbol = ""
+		function drawHighstock(stockSymbol) {
 
-		function alertWindow() {
-			alert("YEAH!!!")
+			//Ajax call for chart data
+	        $.ajax({
+	            url: "http://gentle-dominion-127300.appspot.com/",
+	            data: {  chart_symbol : stockSymbol },
+	            type: "GET",
+	            datatype: "json",
+	            success: function(jsonStr) {
+	                //parse JSON String to JSON Obj
+	                var jsonObj = jQuery.parseJSON(jsonStr);
+
+	                //HighStocks API renders data
+	                render(jsonObj);
+
+	            }
+	        });
 		}
-
-        //Ajax call for chart data
-        $.ajax({
-            url: "http://gentle-dominion-127300.appspot.com/",
-            data: {  chart_symbol : stockSymbol },
-            type: "GET",
-            datatype: "json",
-            success: function(jsonStr) {
-                //parse JSON String to JSON Obj
-                var jsonObj = jQuery.parseJSON(jsonStr);
-
-                //HighStocks API renders data
-                render(jsonObj);
-
-            }
-        });
+		
 
 	    function _fixDate(dateIn) {
 	        var dat = new Date(dateIn);
@@ -182,6 +171,14 @@
 
 	    });
 	</script>
+
+	<!-- including JQuery -->
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <!-- highstock -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
 
 </body>

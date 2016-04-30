@@ -11,34 +11,37 @@ import UIKit
 import SwiftyJSON
 
 
-class HistoricalChartViewController: UIViewController {
+class HistoricalChartViewController: UIViewController, UIWebViewDelegate {
     
     var _json: JSON  = []
+    var stockSymbol:String = ""
     
     
     @IBOutlet weak var webView: UIWebView!
     
-    override func viewDidLoad() {
-        
-            super.viewDidLoad()
-
-            //let stockSymbol:String = _json["Symbol"].string!;
-            
-            let localfilePath = NSBundle.mainBundle().URLForResource("highstock", withExtension: "html");
-            let myRequest = NSURLRequest(URL: localfilePath!);
-            webView.loadRequest(myRequest);
-            //webView.stringByEvaluatingJavaScriptFromString("stockSymbol = \(stockSymbol)");
-            //webView.stringByEvaluatingJavaScriptFromString("document.getElementById('historicalCharts').innerHTML = '!!!!!!!!!HELP!!!!!!!!!!'")
-        webView.stringByEvaluatingJavaScriptFromString("alertWindow()")
+    override func viewDidAppear(animated: Bool) {
         
         
-            print(_json)
-    
     }
     
-//    func webViewDidFinishLoad(webView: UIWebView) {
-//        webView.stringByEvaluatingJavaScriptFromString("document.getElementById('historicalCharts').innerHTML = '!!!!!!!!!HELP!!!!!!!!!!'")
-//    }
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        webView.delegate = self
+        
+        stockSymbol = _json["Symbol"].string!;
+        
+        let localfilePath = NSBundle.mainBundle().URLForResource("highstock", withExtension: "html");
+        let myRequest = NSURLRequest(URL: localfilePath!);
+        webView.loadRequest(myRequest);
+
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        webView.stringByEvaluatingJavaScriptFromString("drawHighstock('\(self.stockSymbol)')");
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

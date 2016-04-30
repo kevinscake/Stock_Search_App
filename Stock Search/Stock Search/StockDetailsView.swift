@@ -45,58 +45,25 @@ class StockDetailsView: UIViewController {
     //This method is called whenever ANY segue is called
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        switch (self.segmentedControl.selectedSegmentIndex) {
-        case 0:
-            
-            print("cur")
-            
+        let segueID:String = segue.identifier!
+        
+        //check if the identifier of the segue happening is the one we think
+        if segueID == "CurrentSegue" {
+ 
             if let currentViewController: CurrentViewController = segue.destinationViewController as? CurrentViewController {
                 
                 currentViewController._json = self._json
             }
             
-//            if let historicalChartViewController: HistoricalChartViewController = segue.destinationViewController as? HistoricalChartViewController {
-//                
-//                historicalChartViewController._json = self._json
-//            }
-//            break;
-        case 1:
-            print("his")
-//            
-//            if let historicalChartViewController: HistoricalChartViewController = segue.destinationViewController as? HistoricalChartViewController {
-//                
-//                historicalChartViewController._json = self._json
-//            }
-            break;
-        case 2:
-            break;
-        default:
-            break;
         }
-        
-        
-        
-        
-        //check if the identifier of the segue happening is the one we think
-//        if segue.identifier == "CurrentSegue" {
-//            
-//            print("cur")
-// 
-//            if let currentViewController: CurrentViewController = segue.destinationViewController as? CurrentViewController {
-//                
-//                currentViewController._json = self._json
-//            }
-//        }
-//        if segue.identifier == "HistorySegue" {
-//            
-//            print("his")
-//
-//            if let historicalChartViewController: HistoricalChartViewController = segue.destinationViewController as? HistoricalChartViewController {
-//                
-//                historicalChartViewController._json = self._json
-//            }
-//        }
-//        if segue.identifier == "NewsSegue" {
+        if segueID == "HistoricalSegue" {
+
+            if let historicalChartViewController: HistoricalChartViewController = segue.destinationViewController as? HistoricalChartViewController {
+                
+                historicalChartViewController._json = self._json
+            }
+        }
+//        if segueID == "NewsSegue" {
 //
 //            if let StockDetailsViewController: StockDetailsView = segue.destinationViewController as? StockDetailsView {
 //                
