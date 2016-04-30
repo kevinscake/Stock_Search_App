@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Highcharts</title>
+	<!-- including JQuery -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body>
+	<div id="historicalCharts">something here...</div>
+
+	<!-- highstock -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    <!-- highstock render script -->
+	<script>
+
+		var stockSymbol = "AAPL";
+		//var stockSymbol = ""
+
+		function alertWindow() {
+			alert("YEAH!!!")
+		}
+
+        //Ajax call for chart data
+        $.ajax({
+            url: "http://gentle-dominion-127300.appspot.com/",
+            data: {  chart_symbol : stockSymbol },
+            type: "GET",
+            datatype: "json",
+            success: function(jsonStr) {
+                //parse JSON String to JSON Obj
+                var jsonObj = jQuery.parseJSON(jsonStr);
+
+                //HighStocks API renders data
+                render(jsonObj);
+
+            }
+        });
+
+	    function _fixDate(dateIn) {
+	        var dat = new Date(dateIn);
+	        return Date.UTC(dat.getFullYear(), dat.getMonth(), dat.getDate());
+	    };
+
+	    function _getOHLC(json) {
+	        var dates = json.Dates || [];
+	        var elements = json.Elements || [];
+	        var chartSeries = [];
+
+	        if (elements[0]){
+
+	            for (var i = 0, datLen = dates.length; i < datLen; i++) {
+	                var dat = _fixDate( dates[i] );
+	                var pointData = [
+	                    dat,
+	                    elements[0].DataSeries['close'].values[i]
+	                ];
+	                chartSeries.push( pointData );
+	            };
+	        }
+	        return chartSeries;
+	    };
+
+	    function render(data) {
+	        // split the data set into ohlc and volume
+
+	        var ohlc = _getOHLC(data);
+
+	        var symbol = data.Elements[0].Symbol;
+
+	        // set the allowed units for data grouping
+	        var groupingUnits = [[
+	            'week',                         // unit name
+	            [1]                             // allowed multiples
+	        ], [
+	            'month',
+	            [1, 2, 3, 4, 6]
+	        ]];
+
+	        // create the chart
+	        $('#historicalCharts').highcharts('StockChart', {
+
+	            navigation:{
+	                buttonOptions:{
+	                    enabled:false
+	                }
+	            },
+	            
+	            rangeSelector: {
+	                selected: 0,
+
+	                inputEnabled:false,
+	                allButtonsEnabled: true,
+
+	                buttons: [{
+	                    type: 'week',
+	                    count: 1,
+	                    text: '1w'
+	                }, {
+	                    type: 'month',
+	                    count: 1,
+	                    text: '1m'
+	                },{
+	                    type: 'month',
+	                    count: 3,
+	                    text: '3m'
+	                }, {
+	                    type: 'month',
+	                    count: 6,
+	                    text: '6m'
+	                }, {
+	                    type: 'ytd',
+	                    text: 'YTD'
+	                }, {
+	                    type: 'year',
+	                    count: 1,
+	                    text: '1y'
+	                }, {
+	                    type: 'all',
+	                    text: 'All'
+	                }]
+
+	            },
+
+	            title: {
+	                text: symbol + ' Stock Value'
+	            },
+
+	            yAxis: [{
+	                height: 200,
+	                lineWidth: 2
+	            }, {
+	                top: 300,
+	                height: 100,
+	                offset: 0,
+	                lineWidth: 2
+	            }],
+	            
+	            series: [{
+	                type: 'area',
+	                name: symbol,
+	                data: ohlc,
+	                dataGrouping: {
+	                    units: groupingUnits
+	                },
+	                tooltip:{
+	                    valueDecimals:2,
+	                    valuePrefix:"$"
+	                },
+
+	                fillColor : {
+	                    linearGradient : {
+	                        x1: 0,
+	                        y1: 0,
+	                        x2: 0,
+	                        y2: 1
+	                    },
+	                    stops : [
+	                        [0, Highcharts.getOptions().colors[0]],
+	                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+	                    ]
+	                }
+
+	            }],
+
+	            credits: {
+	                enabled:false
+	            }
+
+	        });
+	    };
+
+	    //debug code for initial chart size
+	    $("#historicalCharts_button").click(function(){
+	        
+	        setTimeout(function(){
+	            $("#historicalCharts").highcharts().reflow();
+	        },10)
+
+	    });
+	</script>
+
+
+</body>
+
+</html>

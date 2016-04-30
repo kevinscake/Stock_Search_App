@@ -16,6 +16,8 @@
 		3E6EA4B51CC98B46009E4FA5 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6EA4B41CC98B46009E4FA5 /* Bolts.framework */; };
 		3E72878D1CC813B3004E75A1 /* CurrentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E72878C1CC813B3004E75A1 /* CurrentViewController.swift */; };
 		3E80829B1CC6B401007DB2FE /* StockDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80829A1CC6B401007DB2FE /* StockDetailsView.swift */; };
+		3EC10D561CD45EF5009CAB42 /* HistoricalChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC10D551CD45EF5009CAB42 /* HistoricalChartViewController.swift */; };
+		3EC10D581CD4664C009CAB42 /* highstock.html in Resources */ = {isa = PBXBuildFile; fileRef = 3EC10D571CD4664C009CAB42 /* highstock.html */; };
 		3ED52C161CC1BC7F007D436D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED52C151CC1BC7F007D436D /* AppDelegate.swift */; };
 		3ED52C181CC1BC7F007D436D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED52C171CC1BC7F007D436D /* ViewController.swift */; };
 		3ED52C1B1CC1BC7F007D436D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ED52C191CC1BC7F007D436D /* Main.storyboard */; };
@@ -55,6 +57,8 @@
 		3E6EA4B41CC98B46009E4FA5 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../facebook_ios_sdk/FacebookSDKs-iOS-20160412/Bolts.framework"; sourceTree = "<group>"; };
 		3E72878C1CC813B3004E75A1 /* CurrentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentViewController.swift; sourceTree = "<group>"; };
 		3E80829A1CC6B401007DB2FE /* StockDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockDetailsView.swift; sourceTree = "<group>"; };
+		3EC10D551CD45EF5009CAB42 /* HistoricalChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalChartViewController.swift; sourceTree = "<group>"; };
+		3EC10D571CD4664C009CAB42 /* highstock.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = highstock.html; sourceTree = "<group>"; };
 		3ED52C121CC1BC7E007D436D /* Stock Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock Search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED52C151CC1BC7F007D436D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ED52C171CC1BC7F007D436D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,8 +137,10 @@
 				3ED52C151CC1BC7F007D436D /* AppDelegate.swift */,
 				3ED52C171CC1BC7F007D436D /* ViewController.swift */,
 				3E80829A1CC6B401007DB2FE /* StockDetailsView.swift */,
+				3EC10D551CD45EF5009CAB42 /* HistoricalChartViewController.swift */,
 				3E72878C1CC813B3004E75A1 /* CurrentViewController.swift */,
 				3ED52C191CC1BC7F007D436D /* Main.storyboard */,
+				3EC10D571CD4664C009CAB42 /* highstock.html */,
 				3E6EA4A91CC8841A009E4FA5 /* arrowTableViewCell.swift */,
 				3EF927F51CC837D80075C2F2 /* noArrowTableViewCell.swift */,
 				3ED52C1C1CC1BC7F007D436D /* Assets.xcassets */,
@@ -296,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ED52C201CC1BC7F007D436D /* LaunchScreen.storyboard in Resources */,
+				3EC10D581CD4664C009CAB42 /* highstock.html in Resources */,
 				3ED52C1D1CC1BC7F007D436D /* Assets.xcassets in Resources */,
 				3ED52C491CC1C78D007D436D /* Podfile in Resources */,
 				3ED52C1B1CC1BC7F007D436D /* Main.storyboard in Resources */,
@@ -372,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EF927F61CC837D80075C2F2 /* noArrowTableViewCell.swift in Sources */,
+				3EC10D561CD45EF5009CAB42 /* HistoricalChartViewController.swift in Sources */,
 				3E72878D1CC813B3004E75A1 /* CurrentViewController.swift in Sources */,
 				3ED52C181CC1BC7F007D436D /* ViewController.swift in Sources */,
 				3E6EA4AA1CC8841A009E4FA5 /* arrowTableViewCell.swift in Sources */,

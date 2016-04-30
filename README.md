@@ -374,13 +374,27 @@ Key Words: Stock Details(Current)
 
 Date: 04/21/2016
 
-Key Words: table view layout, facebook, historical chart
+Key Words: table view layout, facebook
 
 ---
 
 ###1. table view layout
 
-###2. facebok
+###2. facebook
+
+`FBSDKShareLinkContent`  and `FBSDKShareDialog`
+
+---
+
+Date: 04/29/2016
+
+Key Words: historical chart
+
+---
+
+###1. `UIWebView`
+
+BUG: `webView.stringByEvaluatingJavaScriptFromString("xxxx")` does not work
 
 
 

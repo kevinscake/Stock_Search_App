@@ -42,11 +42,89 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stock Search/CurrentViewController.swift"
-            timestampString = "483044619.148235"
+            timestampString = "483694558.039529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195">
+            startingLineNumber = "197"
+            endingLineNumber = "197">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Search/StockDetailsView.swift"
+            timestampString = "483696147.682033"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "StockDetailsView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Search.StockDetailsView.currentView.getter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIView&gt;"
+                  moduleName = "Stock Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiayuanh/Desktop/projects/Stock_Search_App/Stock%20Search/Stock%20Search/StockDetailsView.swift"
+                  timestampString = "483696148.042522"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Search.StockDetailsView.currentView.setter : weak Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIView&gt;"
+                  moduleName = "Stock Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiayuanh/Desktop/projects/Stock_Search_App/Stock%20Search/Stock%20Search/StockDetailsView.swift"
+                  timestampString = "483696148.049852"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "42">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Search.StockDetailsView.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; Stock_Search.StockDetailsView"
+                  moduleName = "Stock Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiayuanh/Desktop/projects/Stock_Search_App/Stock%20Search/Stock%20Search/StockDetailsView.swift"
+                  timestampString = "483696148.049971"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "326">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Search.StockDetailsView.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Stock_Search.StockDetailsView&gt;"
+                  moduleName = "Stock Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jiayuanh/Desktop/projects/Stock_Search_App/Stock%20Search/Stock%20Search/StockDetailsView.swift"
+                  timestampString = "483696148.050055"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "243">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

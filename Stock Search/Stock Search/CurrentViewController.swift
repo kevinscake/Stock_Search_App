@@ -52,6 +52,8 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         
+        super.viewDidLoad()
+        
         //define the scrollable area that outside of the scrollable content area
         currentScroller.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
