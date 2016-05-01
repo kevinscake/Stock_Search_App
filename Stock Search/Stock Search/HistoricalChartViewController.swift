@@ -19,12 +19,6 @@ class HistoricalChartViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var webView: UIWebView!
     
-    override func viewDidAppear(animated: Bool) {
-        
-        
-    }
-    
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -36,6 +30,7 @@ class HistoricalChartViewController: UIViewController, UIWebViewDelegate {
         let localfilePath = NSBundle.mainBundle().URLForResource("highstock", withExtension: "html");
         let myRequest = NSURLRequest(URL: localfilePath!);
         webView.loadRequest(myRequest);
+        
 
     }
     

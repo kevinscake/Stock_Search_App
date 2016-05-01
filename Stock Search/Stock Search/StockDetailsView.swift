@@ -63,13 +63,13 @@ class StockDetailsView: UIViewController {
                 historicalChartViewController._json = self._json
             }
         }
-//        if segueID == "NewsSegue" {
-//
-//            if let StockDetailsViewController: StockDetailsView = segue.destinationViewController as? StockDetailsView {
-//                
-//                StockDetailsViewController._json = self._json
-//            }
-//        }
+        if segueID == "NewsSegue" {
+
+            if let newsViewController: NewsViewController = segue.destinationViewController as? NewsViewController {
+                
+                newsViewController._json = self._json
+            }
+        }
     }
     
     override func viewDidLoad() {

@@ -99,10 +99,6 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        
-        
-        
-        
         // Configure the cell...
         switch indexPath.row {
         case 0:

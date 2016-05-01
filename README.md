@@ -394,7 +394,45 @@ Key Words: historical chart
 
 ###1. `UIWebView`
 
-BUG: `webView.stringByEvaluatingJavaScriptFromString("xxxx")` does not work
+#### BUG: `webView.stringByEvaluatingJavaScriptFromString("xxxx")` does not work
+
+---
+
+Date: 04/30/2016
+
+Key Words: historical chart, news
+
+---
+
+###1. `UIWebView`
+
+#### BUG-FIXED: `webView.stringByEvaluatingJavaScriptFromString("xxxx")` does not work
+
+#### Analysis:
+
+At the beginning, I called `stringByEvaluatingJavaScriptFromString` inside `viewDidLoad()`, but `viewDidLoad()` *do not mean* `webViewDidFinishLoad()`, so the calling has not effect since the web page doesn't ready.
+
+Calling `stringByEvaluatingJavaScriptFromString` inside `webViewDidFinishLoad()` ensures we can excute our JS code after everything is ready.
+
+
+```
+func webViewDidFinishLoad(webView: UIWebView) {
+        webView.stringByEvaluatingJavaScriptFromString("drawHighstock('\(self.stockSymbol)')");
+    }
+```
+
+#### Key:
+
+1) `UIWebViewDelegate` and `func webViewDidFinishLoad(webView: UIWebView)`
+
+2) *Do not* miss those sigle quote when pass swift data as JS function parameters
+
+###2. news
+
+BUG: cannot write data into table cell
+
+BUG-FIXed: drag table view to View controller to link table and view controller for `dataSource` and `delegate`.
+
 
 
 
