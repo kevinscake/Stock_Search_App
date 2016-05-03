@@ -518,6 +518,7 @@
                     <connections>
                         <outlet property="currentScroller" destination="vta-xH-FSs" id="HLL-lD-hws"/>
                         <outlet property="dailyStockChartImageView" destination="rxr-MN-akB" id="Anx-UH-uJt"/>
+                        <outlet property="favouriteButton" destination="Afu-hy-mOD" id="IX5-3f-3ct"/>
                         <outlet property="tableView" destination="vEH-qE-rLU" id="Hpr-kZ-EVl"/>
                     </connections>
                 </viewController>

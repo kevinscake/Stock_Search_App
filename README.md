@@ -435,7 +435,7 @@ BUG-FIXed: drag table view to View controller to link table and view controller 
 
 ---
 
-Date: 04/30/2016
+Date: 5/2/2016
 
 Key Words: favourite list
 
@@ -451,7 +451,23 @@ key :
 
 1) passing instance reference using segue
 
+---
 
+Date: 5/3/2016
+
+Key Words: favourite list,
+
+---
+
+###1. deleting data
+
+table swipe to delest
+
+###2. favourite button
+
+* check whether stock has been saved before
+
+#####possible BUG: stock automactically  sorted
 
 
 

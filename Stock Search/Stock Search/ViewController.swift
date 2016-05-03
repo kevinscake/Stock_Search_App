@@ -262,7 +262,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Delete it from the managedContext
         managedObjectContext.deleteObject(stockToDelete)
         
-        // Refresh the table view to indicate that it's deleted
+        // Updated favouriteStock & Refresh the table view to indicate that it's deleted
         let fetchRequest = NSFetchRequest(entityName: "FavouriteStock")
         
         do {

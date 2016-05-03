@@ -36,9 +36,47 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     //favourite button
+    
+    @IBOutlet weak var favouriteButton: UIButton!
     @IBAction func favouriteButtonClicked(sender: AnyObject) {
         
-        self.saveStock(_json["Symbol"].string!)
+        
+        let savedStocks = viewController?.favouriteStock
+        var isSaved:Bool = false
+        
+        for savedStock in savedStocks! {
+        
+            let savedStockSymbol: String = savedStock.valueForKey("symbol") as! String
+            
+            //if stock has been saved, delete it
+            if savedStockSymbol == _json["Symbol"].string! {
+                viewController?.managedObjectContext.deleteObject(savedStock)
+                favouriteButton.setImage(UIImage(named: "Star-Empty-30"), forState: UIControlState.Normal)
+                isSaved = true
+                
+                // Updated favouriteStock
+                let fetchRequest = NSFetchRequest(entityName: "FavouriteStock")
+                
+                do {
+                    let results = try viewController?.managedObjectContext.executeFetchRequest(fetchRequest)
+                    viewController?.favouriteStock = results as! [NSManagedObject]
+                } catch let error as NSError {
+                    print("Could not fetch \(error), \(error.userInfo)")
+                }
+                
+                break
+            }
+        }
+        
+        //if stock has not been saved, saved it
+        if !isSaved {
+            self.saveStock(_json["Symbol"].string!)
+            favouriteButton.setImage(UIImage(named: "Star Filled-30"), forState: UIControlState.Normal)
+        }
+        
+        
+        print(viewController?.favouriteStock)
+        //reload table
         viewController?.favouriteTable.reloadData()
         
     }
@@ -56,6 +94,7 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let stock = NSManagedObject(entity: entity!,
                                      insertIntoManagedObjectContext: managedContext)
+        
         
         //3
         stock.setValue(symbol, forKey: "symbol")
@@ -110,6 +149,31 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         let url = NSURL(string: stockDailyChartURL)
         let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
         dailyStockChartImageView.image = UIImage(data: data!)
+        
+        
+        //initial favourite star type
+        let savedStocks = viewController?.favouriteStock
+        var isSaved:Bool = false
+        
+        for savedStock in savedStocks! {
+            
+            let savedStockSymbol: String = savedStock.valueForKey("symbol") as! String
+            
+            //if stock has been saved, display filled star
+            if savedStockSymbol == _json["Symbol"].string! {
+                favouriteButton.setImage(UIImage(named: "Star Filled-30"), forState: UIControlState.Normal)
+                isSaved = true
+                break
+            }
+        }
+        
+        //if stock has not been saved, display empty star
+        if !isSaved {
+            favouriteButton.setImage(UIImage(named: "Star-Empty-30"), forState: UIControlState.Normal)
+        }
+        
+        
+        
         
     }
 
