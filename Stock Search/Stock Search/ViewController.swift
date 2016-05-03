@@ -18,7 +18,8 @@ import CoreData
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     
     ////////////////////////search form////////////////////
@@ -158,6 +159,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    //fetch favourite stock info
     override func viewWillAppear(animated: Bool)
     {
         //hide navigation bar
@@ -246,6 +248,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
         
     }
+    
+    //this tells the UITableView that we can edit(delete) these rows
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    //this method gets called upon performing the swipe-to-delete action
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // Find the LogItem object the user is trying to delete
+        let stockToDelete = favouriteStock[indexPath.row]
+        
+        // Delete it from the managedContext
+        managedObjectContext.deleteObject(stockToDelete)
+        
+        // Refresh the table view to indicate that it's deleted
+        let fetchRequest = NSFetchRequest(entityName: "FavouriteStock")
+        
+        do {
+            let results = try managedObjectContext.executeFetchRequest(fetchRequest)
+            favouriteStock = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        // Tell the table view to animate out that row
+        favouriteTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+    }
+    
 //
 //    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //        
