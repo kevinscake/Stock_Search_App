@@ -15,6 +15,8 @@ class StockDetailsView: UIViewController {
     
     var _json:JSON = []
     
+    var viewController: ViewController? = nil
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBOutlet weak var currentView: UIView!
@@ -53,6 +55,7 @@ class StockDetailsView: UIViewController {
             if let currentViewController: CurrentViewController = segue.destinationViewController as? CurrentViewController {
                 
                 currentViewController._json = self._json
+                currentViewController.viewController = self.viewController
             }
             
         }

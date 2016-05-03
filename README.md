@@ -433,7 +433,23 @@ BUG: cannot write data into table cell
 
 BUG-FIXed: drag table view to View controller to link table and view controller for `dataSource` and `delegate`.
 
+---
 
+Date: 04/30/2016
+
+Key Words: favourite list
+
+---
+
+###1. adding core data
+
+BUG: how to assign variable from other view controller in swift
+
+DEBUG : using instance reference
+
+key :
+
+1) passing instance reference using segue
 
 
 

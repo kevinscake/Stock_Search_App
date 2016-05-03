@@ -9,10 +9,14 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import CoreData
 
 class CurrentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var _json: JSON  = []
+    
+    //ViewController.swift instance reference
+    var viewController: ViewController? = nil
     
     //scroller setting
     @IBOutlet weak var currentScroller: UIScrollView!
@@ -27,11 +31,47 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
+    
+    
+    
+    
     //favourite button
     @IBAction func favouriteButtonClicked(sender: AnyObject) {
+        
+        self.saveStock(_json["Symbol"].string!)
+        viewController?.favouriteTable.reloadData()
+        
+    }
+    
+    func saveStock(symbol: String) {
+        //1
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        //2
+        let entity =  NSEntityDescription.entityForName("FavouriteStock",
+                                                        inManagedObjectContext:managedContext)
+        
+        let stock = NSManagedObject(entity: entity!,
+                                     insertIntoManagedObjectContext: managedContext)
+        
+        //3
+        stock.setValue(symbol, forKey: "symbol")
+        
+        //4
+        do {
+            try managedContext.save()
+            //5
+            viewController?.favouriteStock.append(stock)
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
     }
     
     
+    //faccbook button
     @IBAction func facebookClicked(sender: AnyObject) {
         ///////////////////////////////////facebook///////////////////////////////////
         let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
@@ -53,6 +93,7 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         //define the scrollable area that outside of the scrollable content area
         currentScroller.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)

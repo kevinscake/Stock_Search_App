@@ -11,11 +11,14 @@ import CCAutocomplete
 import Alamofire
 import SwiftyJSON
 import Alamofire_Synchronous
+import CoreData
 
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+
     
     
     ////////////////////////search form////////////////////
@@ -53,6 +56,7 @@ class ViewController: UIViewController {
             if let StockDetailsViewController: StockDetailsView = segue.destinationViewController as? StockDetailsView {
                 
                 StockDetailsViewController._json = self._json
+                StockDetailsViewController.viewController = self
             }
         }
     }
@@ -153,10 +157,31 @@ class ViewController: UIViewController {
         return true
     }
     
-    //hide navigation bar
+    
     override func viewWillAppear(animated: Bool)
     {
+        //hide navigation bar
         self.navigationController?.navigationBarHidden = true
+        
+        //load favourite stock
+        super.viewWillAppear(animated)
+        //1
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        //2
+        let fetchRequest = NSFetchRequest(entityName: "FavouriteStock")
+        
+        //3
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            favouriteStock = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -168,6 +193,69 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    ////////////////////////favourite list table////////////////////
+    var favouriteStock = [NSManagedObject]()
+    
+    @IBOutlet weak var favouriteTable: UITableView!
+    
+    // MARK: - Table view data source
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return favouriteStock.count
+    }
+
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("favouriteCell", forIndexPath: indexPath) as! favouriteTableCell
+        
+        let stock = favouriteStock[indexPath.row]
+        
+        let symbol = stock.valueForKey("symbol") as? String
+        //Synchronous Http call ----- get quote
+        let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["quoteInput": symbol!]).responseJSON()
+        if let value = response.result.value {
+            //SwiftyJSON's JSON type
+            let json = JSON(value)
+            // Configure the cell...
+            cell.symbol.text = json["Symbol"].string!
+            cell.companyName.text = json["Name"].string!
+            cell.price.text = "$" + String(format: "%.2f", json["LastPrice"].double!)
+            cell.change.text = String(format: "%.2f", json["Change"].double!) + "(" + String(format: "%.2f", json["ChangePercent"].double!) + "%)"
+            //determine lable background color
+            if(Double(round(1000*json["Change"].double!)/1000)>0) {
+                cell.change.backgroundColor = UIColor.greenColor()
+                cell.change.textColor = UIColor.whiteColor()
+            }
+            if(Double(round(1000*json["Change"].double!)/1000)<0) {
+                cell.change.backgroundColor = UIColor.redColor()
+                cell.change.textColor = UIColor.whiteColor()
+            }
+            
+            cell.marketCap.text = "Market Cap: " + String(format: "%.2f", json["MarketCap"].double!/1000000000) + " Billion"
+        }
+        
+        return cell
+        
+    }
+//
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        //open url in safari when cell is cliced
+//        let _jsonSignleNews: JSON = _jsonNews["d"]["results"][indexPath.row]
+//        let url: String = _jsonSignleNews["Url"].string!
+//        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+//    }
+    
+    
 
 
 }
