@@ -165,8 +165,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //hide navigation bar
         self.navigationController?.navigationBarHidden = true
         
-        //load favourite stock
+        
         super.viewWillAppear(animated)
+        //load favourite stock
         //1
         let appDelegate =
             UIApplication.sharedApplication().delegate as! AppDelegate
@@ -189,6 +190,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        //switch state
+        refreshSwitch.addTarget(self, action: Selector("switchIsChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -296,6 +302,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //remove selected highlight effect
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    ////////////////////refresh////////////////////
+    
+    @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView!
+    //manual
+    @IBAction func refreshButtonClicked(sender: AnyObject) {
+        
+        loadingIndicatorView.startAnimating()
+        favouriteTable.reloadData()
+        loadingIndicatorView.performSelector(#selector(ViewController.stopAnimating), withObject: nil, afterDelay: 2)
+    }
+    
+    func stopAnimating(){
+        loadingIndicatorView.stopAnimating()
+    }
+    
+    //auto
+    @IBOutlet weak var refreshSwitch: UISwitch!
+    var refreshTimer = NSTimer()
+    
+    func switchIsChanged(mySwitch: UISwitch) {
+        if mySwitch.on {
+            refreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(self.favouriteTableReload), userInfo: nil, repeats: true)
+        }
+        else {
+            refreshTimer.invalidate()
+        }
+    }
+    
+    func favouriteTableReload() {
+        loadingIndicatorView.startAnimating()
+        favouriteTable.reloadData()
+        loadingIndicatorView.performSelector(#selector(ViewController.stopAnimating), withObject: nil, afterDelay: 2)
     }
     
     
