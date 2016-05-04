@@ -285,13 +285,13 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         case 7:
             let arrowCell = tableView.dequeueReusableCellWithIdentifier("arrowCell", forIndexPath: indexPath) as! arrowTableViewCell
             arrowCell.arrowCellTitle.text = "ChangeYTD"
-            arrowCell.arrowCellDetail.text = String(format: "%.2f", _json["Change"].double!) + "(" + String(format: "%.2f", _json["ChangePercentYTD"].double!) + "%)"
+            arrowCell.arrowCellDetail.text = String(format: "%.2f", _json["ChangeYTD"].double!) + "(" + String(format: "%.2f", _json["ChangePercentYTD"].double!) + "%)"
             
             //arrow type
-            if(Double(round(1000*_json["Change"].double!)/1000)>0) {
+            if(Double(round(1000*_json["ChangeYTD"].double!)/1000)>0) {
                 arrowCell.arrowCellImage.image = arrowImage["Up"]!
             }
-            if(Double(round(1000*_json["Change"].double!)/1000)<0) {
+            if(Double(round(1000*_json["ChangeYTD"].double!)/1000)<0) {
                 arrowCell.arrowCellImage.image = arrowImage["Down"]!
             }
             

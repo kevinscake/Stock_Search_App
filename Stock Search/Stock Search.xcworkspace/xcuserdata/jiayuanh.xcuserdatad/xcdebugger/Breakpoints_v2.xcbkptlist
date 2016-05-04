@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stock Search/CurrentViewController.swift"
-            timestampString = "484031563.432874"
+            timestampString = "484094035.134871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330">
+            startingLineNumber = "332"
+            endingLineNumber = "332">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
