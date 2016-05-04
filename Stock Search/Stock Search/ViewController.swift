@@ -276,14 +276,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         favouriteTable.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
     
-//
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        
-//        //open url in safari when cell is cliced
-//        let _jsonSignleNews: JSON = _jsonNews["d"]["results"][indexPath.row]
-//        let url: String = _jsonSignleNews["Url"].string!
-//        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
-//    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //retieve stock symbol
+        let symbol = favouriteStock[indexPath.row].valueForKey("symbol") as? String
+        
+        //Synchronous Http call ----- get quote
+        let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["quoteInput": symbol!]).responseJSON()
+        if let value = response.result.value {
+            
+            //SwiftyJSON's JSON type
+            self._json = JSON(value)
+            
+        }
+        
+        //view transit
+        performSegueWithIdentifier("ShowStockDetails", sender: nil)
+    }
     
     
 
