@@ -293,6 +293,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //view transit
         performSegueWithIdentifier("ShowStockDetails", sender: nil)
+        
+        //remove selected highlight effect
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     

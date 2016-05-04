@@ -75,6 +75,9 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         let _jsonSignleNews: JSON = _jsonNews["d"]["results"][indexPath.row]
         let url: String = _jsonSignleNews["Url"].string!
         UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        
+        //remove selected highlight effect
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     
