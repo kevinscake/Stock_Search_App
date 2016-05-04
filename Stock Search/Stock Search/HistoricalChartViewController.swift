@@ -15,6 +15,8 @@ class HistoricalChartViewController: UIViewController, UIWebViewDelegate {
     
     var _json: JSON  = []
     var stockSymbol:String = ""
+    // Define a notification key
+    let loadChartsNotificationKey = "loadChart"
     
     
     @IBOutlet weak var webView: UIWebView!
@@ -27,12 +29,19 @@ class HistoricalChartViewController: UIViewController, UIWebViewDelegate {
         
         stockSymbol = _json["Symbol"].string!;
         
-        let localfilePath = NSBundle.mainBundle().URLForResource("highstock", withExtension: "html");
-        let myRequest = NSURLRequest(URL: localfilePath!);
-        webView.loadRequest(myRequest);
+        //Observe (listen for) "special notification key"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HistoricalChartViewController.redrawChart), name: loadChartsNotificationKey, object: nil)
         
 
     }
+    
+    //Implement function to act on notification
+    func redrawChart() {
+        let localfilePath = NSBundle.mainBundle().URLForResource("highstock", withExtension: "html");
+        let myRequest = NSURLRequest(URL: localfilePath!);
+        webView.loadRequest(myRequest);
+    }
+    
     
     func webViewDidFinishLoad(webView: UIWebView) {
         webView.stringByEvaluatingJavaScriptFromString("drawHighstock('\(self.stockSymbol)')");

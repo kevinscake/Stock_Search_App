@@ -23,6 +23,12 @@ class StockDetailsView: UIViewController {
     @IBOutlet weak var historicalView: UIView!
     @IBOutlet weak var NewsView: UIView!
     
+    // Define a notification key
+    let loadDetailsNotificationKey = "loadDetails"
+    let loadChartsNotificationKey = "loadChart"
+    let loadNewsNotificationKey = "loadNews"
+    
+    
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex
@@ -31,14 +37,20 @@ class StockDetailsView: UIViewController {
             currentView.hidden = false
             historicalView.hidden = true
             NewsView.hidden = true
+            //Post notification
+            NSNotificationCenter.defaultCenter().postNotificationName(loadDetailsNotificationKey, object: self)
         case 1:
             currentView.hidden = true
             historicalView.hidden = false
             NewsView.hidden = true
+            //Post notification
+            NSNotificationCenter.defaultCenter().postNotificationName(loadChartsNotificationKey, object: self)
         case 2:
             currentView.hidden = true
             historicalView.hidden = true
             NewsView.hidden = false
+            //Post notification
+            NSNotificationCenter.defaultCenter().postNotificationName(loadNewsNotificationKey, object: self)
         default:
             break;
         }

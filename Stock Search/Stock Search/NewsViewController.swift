@@ -18,7 +18,14 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var _jsonNews: JSON = []
     
+    
+    // Define a notification key
+    let loadNewsNotificationKey = "loadNews"
+    
+    
+    
     override func viewDidLoad() {
+        
         //Synchronous Http call ----- news
         let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["bing_symbol": _json["Symbol"].string!]).responseJSON()
         if let value = response.result.value {
@@ -27,6 +34,23 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
             _jsonNews = JSON(value)
             
         }
+        
+        //Observe (listen for) "special notification key"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadNews), name: loadNewsNotificationKey, object: nil)
+    }
+    
+    //Implement function to act on notification
+    func reloadNews() {
+        //Synchronous Http call ----- news
+        let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["bing_symbol": _json["Symbol"].string!]).responseJSON()
+        if let value = response.result.value {
+            
+            //SwiftyJSON's JSON type
+            _jsonNews = JSON(value)
+            
+        }
+        
+        newsTable.reloadData()
     }
     
     override func didReceiveMemoryWarning() {

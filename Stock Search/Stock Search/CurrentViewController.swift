@@ -10,10 +10,14 @@ import Foundation
 import UIKit
 import SwiftyJSON
 import CoreData
+import Alamofire
+import Alamofire_Synchronous
 
 class CurrentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var _json: JSON  = []
+    // Define a notification key
+    let loadDetailsNotificationKey = "loadDetails"
     
     //ViewController.swift instance reference
     var viewController: ViewController? = nil
@@ -174,7 +178,35 @@ class CurrentViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
         
+        //Observe (listen for) "special notification key"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadContent), name: loadDetailsNotificationKey, object: nil)
         
+    }
+    
+    func reloadContent(){
+        
+        //request new data and reload table
+        //Synchronous Http call ----- get quote
+        let response = Alamofire.request(.GET, "http://gentle-dominion-127300.appspot.com/", parameters: ["quoteInput": _json["Symbol"].string!]).responseJSON()
+        if let value = response.result.value {
+            
+            //SwiftyJSON's JSON type
+            self._json = JSON(value)
+            
+        }
+        tableView.reloadData()
+        
+        //redraw daily chart
+        //decide image width & heigh
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let width = screenSize.width
+        let height = screenSize.width*2/3
+        
+        
+        let stockDailyChartURL = "http://chart.finance.yahoo.com/t?s=" + _json["Symbol"].string! + "&lang=en-US&width=" + String(width) + "&height=" + String(height)
+        let url = NSURL(string: stockDailyChartURL)
+        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        dailyStockChartImageView.image = UIImage(data: data!)
     }
 
     override func didReceiveMemoryWarning() {
