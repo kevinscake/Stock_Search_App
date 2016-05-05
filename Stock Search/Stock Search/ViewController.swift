@@ -15,7 +15,7 @@ import CoreData
 
 
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     
     // Retreive the managedObjectContext from AppDelegate
@@ -31,6 +31,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var isInputValid = false
     
     var isFirstLoad: Bool = true
+    
+    
+    
+    //tab Return to dismiss keyboard
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        inputTextField.resignFirstResponder()
+        return true
+    }
+    //tab any place on the screen to dismiss keyboard
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        inputTextField.resignFirstResponder()
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -191,9 +203,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //for keyborad dismiss
+        self.inputTextField.delegate = self;
+        
         
         //switch state
-        refreshSwitch.addTarget(self, action: Selector("switchIsChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+        refreshSwitch.addTarget(self, action: #selector(ViewController.switchIsChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
 
     }
 
