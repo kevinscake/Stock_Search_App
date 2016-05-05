@@ -469,6 +469,13 @@ table swipe to delest
 
 #####possible BUG: stock automactically  sorted
 
+---
+
+Date: 5/4/2016
+
+Key Words: refresh, appicon
+
+---
 
 
 
